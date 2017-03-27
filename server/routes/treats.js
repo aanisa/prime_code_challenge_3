@@ -30,7 +30,7 @@ router.get('/', function (req, res) {
           res.send(500);
         } else {
           res.send(result.rows);
-          console.log(result.rows);
+          // console.log(result.rows);
         }
       });
     }
@@ -44,7 +44,7 @@ router.post('/', function(req, res) {
 console.log(req.body);
 var name = req.body.name;
 var description = req.body.description;
-var pic = req.body.description;
+var pic = req.body.pic;
 
   pool.connect(function(err, client, done) {
       if (err) {
@@ -62,7 +62,6 @@ var pic = req.body.description;
                       res.send(500);
                   } else {
                       res.send(200);
-                      console.log(result.rows);
                     }
               });
       }
@@ -71,7 +70,32 @@ var pic = req.body.description;
 
 
 // PUT /treats/<id>
+router.put('/:id', function(req, res) {
+  var description = req.body.description;
+  var id = req.body.id;
+console.log(id + description);
 
+  pool.connect(function(err, client, done) {
+      if (err) {
+          console.log("Error connecting to database!");
+          res.send(500);
+          done();
+          return;
+      } else {
+          client.query('UPDATE treats SET description = $1 WHERE id = $2',
+              [description, id],
+              function(queryError, result) {
+                  done();
+                  if (queryError) {
+                      console.log('Error making query!');
+                      res.send(500);
+                  } else {
+                      res.send(200);
+                    }
+              });
+      }
+  });
+});
 // DELETE /treats/<id>
 
 /** ---- DO NOT MODIFY BELOW ---- **/
