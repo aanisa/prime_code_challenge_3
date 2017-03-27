@@ -72,7 +72,7 @@ var pic = req.body.pic;
 // PUT /treats/<id>
 router.put('/:id', function(req, res) {
   var description = req.body.description;
-  var id = req.body.id;
+  var id = req.params.id;
 console.log(id + description);
 
   pool.connect(function(err, client, done) {
