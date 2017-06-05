@@ -1,4 +1,4 @@
-# Code Challenge - Week 4 (SQL Databases)
+# Prime Digital Academy - Code Challenge
 
 ## Overview
 
